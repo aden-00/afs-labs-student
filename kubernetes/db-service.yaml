@@ -1,28 +1,13 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: <NAME>
-  namespace: <YOUR NAMESPACE>
-  labels:
-    app: <APP>
+  name: db-service
+  namespace: aaden
 spec:
-  replicas: <REPLICAS>
-  strategy:
-    type: Recreate
-  minReadySeconds: 20
+  type: ClusterIP
   selector:
-    matchLabels:
-      app: <APP>
-  template:
-    metadata:
-      labels:
-        app: <APP>
-    spec:
-      containers:
-      - envFrom:
-        - secretRef:
-            name: db-secret
-        name: <NAME>
-        image: <IMAGE URL>
-        ports:
-        - containerPort: <CONTAINER PORT>
+    app: db
+  ports: 
+    - name: "5432"
+      port: 5432
+      targetPort: 5432
