@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-deployment
-  namespace: aaden
+  name: <NAME>
+  namespace: <YOUR NAMESPACE>
   labels:
-    app: app
+    app: <APP>
 spec:
-  replicas: 1
+  replicas: <REPLICAS>
   strategy:
     type: Recreate
   minReadySeconds: 20
   selector:
     matchLabels:
-      app: app
+      app: <APP>
   template:
     metadata:
       labels:
-        app: app
+        app: <APP>
     spec:
       containers:
       - envFrom:
         - secretRef:
             name: db-secret
-        name: app-deployment
-        image: harbor.dev.afsmtddso.com/aadenharborproject/app:971c881-d2bb1b2
+        name: <NAME>
+        image: <IMAGE URL>
         ports:
-        - containerPort: 5000
+        - containerPort: <CONTAINER PORT>
